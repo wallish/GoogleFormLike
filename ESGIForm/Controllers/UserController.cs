@@ -16,24 +16,34 @@ namespace ESGIForm.Controllers
         }
 
         //affiche le formulaire
-        public ActionResult AddUser()
+        public ActionResult Add()
         {
-            return View();
+            //User user = new User();
+            return View(new User());
         }
 
 
         [HttpPost]
-        public ActionResult AddUser(User user)
+        public ActionResult Add(User user)
         {
             using (var ctx = new Models.FormContext())
             {
+                user.UserId = Guid.NewGuid();
                 ctx.Users.Add(user);
                 ctx.SaveChanges();
 
-                return RedirectToAction("Detail", user);
+                return RedirectToAction("Show", user);
             }
 
         }
+
+    
+
+        public ActionResult Show(User user){
+
+            return View(user);
+        }
+
 
         public IEnumerable<User> GetAllUsers()
         {
@@ -56,6 +66,5 @@ namespace ESGIForm.Controllers
 
             return user;
         }
-
     }
 }

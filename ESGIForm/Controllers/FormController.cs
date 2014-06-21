@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ESGIForm.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,21 @@ namespace ESGIForm.Controllers
 
         public ActionResult Index()
         {
+            return View();
+        }
+
+        public ActionResult Add()
+        {
+
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Add(Form form)
+        {
+
+
             return View();
         }
 

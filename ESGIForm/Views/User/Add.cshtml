@@ -1,0 +1,16 @@
+﻿@model ESGIForm.Models.User
+@{
+    ViewBag.Title = "AddUser";
+}
+
+<h2>Ajouter un utilisateur</h2>
+
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.TextBoxFor(model => Model.Username);
+        @Html.TextBoxFor(model => Model.Firstname);
+        @Html.TextBoxFor(model => Model.Lastname);
+        <button>Valider</button>
+    }
+</div>
