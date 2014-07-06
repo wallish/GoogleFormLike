@@ -1,0 +1,17 @@
+﻿@model IEnumerable<ESGIForm.Models.Form>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+@if (Model != null)
+{
+    <table class="table">
+        @foreach (var item in Model)
+        {
+            <tr><p>@item.FormId</p></tr>
+        }
+    </table>
+
+}

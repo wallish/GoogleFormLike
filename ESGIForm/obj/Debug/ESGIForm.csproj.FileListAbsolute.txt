@@ -34,3 +34,6 @@ c:\users\nirundth\documents\visual studio 2013\Projects\ESGIForm\ESGIForm\bin\Sy
 c:\users\nirundth\documents\visual studio 2013\Projects\ESGIForm\ESGIForm\obj\Debug\ESGIForm.csprojResolveAssemblyReference.cache
 c:\users\nirundth\documents\visual studio 2013\Projects\ESGIForm\ESGIForm\obj\Debug\ESGIForm.dll
 c:\users\nirundth\documents\visual studio 2013\Projects\ESGIForm\ESGIForm\obj\Debug\ESGIForm.pdb
+C:\Users\Nirundth\Documents\Visual Studio 2013\Projects\ESGIForm\ESGIForm\obj\Debug\ESGIForm.Migrations.tata.resources
+C:\Users\Nirundth\Documents\Visual Studio 2013\Projects\ESGIForm\ESGIForm\obj\Debug\ESGIForm.csproj.GenerateResource.Cache
+C:\Users\Nirundth\Documents\Visual Studio 2013\Projects\ESGIForm\ESGIForm\obj\Debug\ESGIForm.Migrations.ea.resources

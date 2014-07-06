@@ -9,8 +9,7 @@ namespace ESGIForm.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            ContextKey = "ESGIForm.Models.FormContext";
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(ESGIForm.Models.FormContext context)

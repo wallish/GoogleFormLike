@@ -55,7 +55,7 @@ namespace ESGIForm.Controllers
             return res;
         }
 
-        [HttpGet]
+      
         public User GetUser(Guid id)
         {
             User user = null;
