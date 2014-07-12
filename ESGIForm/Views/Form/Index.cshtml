@@ -68,7 +68,7 @@
 
                 @* Close *@
                 <div>
-                    <button value="close" type="submit">Fermer</button>
+                    <button value="close" ng-click="close()" type="submit">Fermer</button>
                 </div>
         </div>
 
@@ -101,6 +101,13 @@
                     $http.post('/Form/Add', newItem)
                          .success(function (res, a, b, c) {
                              $scope.todos.push(res);
+                         });
+                };
+
+                $scope.close = function () {
+                    $http.post('/Form/Close')
+                         .success(function (res, a, b, c) {
+                             alert('tata');
                          });
                 };
 

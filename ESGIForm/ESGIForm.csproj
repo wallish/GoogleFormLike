@@ -132,6 +132,14 @@
     <Compile Include="Migrations\201406221242327_ea.Designer.cs">
       <DependentUpon>201406221242327_ea.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201407120958034_new.cs" />
+    <Compile Include="Migrations\201407120958034_new.Designer.cs">
+      <DependentUpon>201407120958034_new.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407121207401_formid.cs" />
+    <Compile Include="Migrations\201407121207401_formid.Designer.cs">
+      <DependentUpon>201407121207401_formid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Form.cs" />
     <Compile Include="Models\FormContext.cs" />
@@ -474,6 +482,7 @@
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Form\List.cshtml" />
     <Content Include="Views\Form\Add.cshtml" />
+    <Content Include="Views\Form\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -532,6 +541,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201406221242327_ea.resx">
       <DependentUpon>201406221242327_ea.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407120958034_new.resx">
+      <DependentUpon>201407120958034_new.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407121207401_formid.resx">
+      <DependentUpon>201407121207401_formid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

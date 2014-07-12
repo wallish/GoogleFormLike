@@ -32,6 +32,8 @@ namespace ESGIForm.Controllers
                 MD5 md5 = System.Security.Cryptography.MD5.Create();
                 form.FormId = Guid.NewGuid();
                 form.CloseDate = DateTime.Now;
+                form.DateInsert = DateTime.Now.ToString();
+                form.DateUpdate = DateTime.Now.ToString();
                 //form.User = user;
                 var foo = random.Next();
                 form.Hash = foo.ToString();
@@ -39,7 +41,7 @@ namespace ESGIForm.Controllers
                 ctx.SaveChanges();
             }
 
-            return View();
+            return View(form);
         }
 
         [HttpPost]
@@ -48,13 +50,13 @@ namespace ESGIForm.Controllers
             /*using (Models.FormContext ctx = new Models.FormContext())
             {
                 question.QuestionId = Guid.NewGuid();
-                ctx.Questions.Add(question);
+                ctx.Questions.Add(que   stion);
                 ctx.SaveChanges();
             }*/
-
+            
             if (!string.IsNullOrEmpty(Request.Form["close"]))
             {
-               
+                question.QuestionId = Guid.NewGuid();
             }
             question.QuestionId = Guid.NewGuid();
 
@@ -65,14 +67,6 @@ namespace ESGIForm.Controllers
 
         public JsonResult List()
         {
-            //lstq = new List<Question>();
-
-
-            /*Question question = new Question() { Title = "zaza", Description = "toto" };
-            question.QuestionId = Guid.NewGuid();
-
-            lstq.Add(question);*/
-
             return Json(lstq, JsonRequestBehavior.AllowGet);
         }
 
@@ -101,6 +95,34 @@ namespace ESGIForm.Controllers
             var toto = lstq;
             return View();
 
+        }
+
+        [HttpPost]
+        public ActionResult Close(Guid guid)
+        {
+            Form form;
+            using (var ctx = new Models.FormContext())
+            {
+                 form = ctx.Forms.Where(f => f.FormId == guid).FirstOrDefault() ;
+                 if (form != null)
+                 {
+                     form.DateUpdate = DateTime.Now.ToString();
+                     form.Status = "1";
+                     ctx.SaveChanges();
+                 }
+            }
+            // récupérer le formulaire
+            // changer le activate à true
+            // rediriger vers la page d'url
+
+            return RedirectToAction("Show",form);
+        }
+
+        public ActionResult Show(Form form)
+        {
+
+            var toto = form;
+            return View(form);
         }
 
       
