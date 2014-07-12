@@ -7,4 +7,19 @@
     }
 }
 
-    
+
+Description : <span>@Model.Description</span>
+
+@using (Html.BeginForm("Show", "Form", FormMethod.Post)){ 
+    foreach (var item in Model.ListQuestion)
+    {
+         <span>@item.Title</span><br />
+         <input type="radio" name="@item.QuestionId" value="oui" ><span>oui</span>
+         <input type="radio" name="@item.QuestionId" value="non"><span>non</span>
+         <br/>                                          
+    }
+    <button type="submit" name="validate" value="valider"></button>    
+}
+
+
+Date de cloture : <span>@Model.CloseDate</span>

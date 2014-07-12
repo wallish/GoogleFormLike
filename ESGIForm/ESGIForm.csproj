@@ -132,7 +132,16 @@
     <Compile Include="Migrations\201407121814225_lp.Designer.cs">
       <DependentUpon>201407121814225_lp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201407121910388_asw.cs" />
+    <Compile Include="Migrations\201407121910388_asw.Designer.cs">
+      <DependentUpon>201407121910388_asw.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407121921158_toto.cs" />
+    <Compile Include="Migrations\201407121921158_toto.Designer.cs">
+      <DependentUpon>201407121921158_toto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\Form.cs" />
     <Compile Include="Models\FormContext.cs" />
     <Compile Include="Models\Question.cs" />
@@ -534,6 +543,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201407121814225_lp.resx">
       <DependentUpon>201407121814225_lp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407121910388_asw.resx">
+      <DependentUpon>201407121910388_asw.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407121921158_toto.resx">
+      <DependentUpon>201407121921158_toto.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

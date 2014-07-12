@@ -158,6 +158,40 @@ namespace ESGIForm.Controllers
 
             return View(form);
         }
+
+        [HttpPost]
+        public ActionResult Show()
+        {
+           // var test = Form;
+            List<Answer> list = new List<Answer>();
+            
+            foreach (string key in Request.Form.AllKeys)
+            {
+                if (key != "validate")
+                {
+                    string[] value = Request.Form.GetValues(key);
+                    Answer asw = new Answer();
+                    asw.AnswerId = Guid.NewGuid();
+                    asw.QuestionId = new Guid(key);
+                    asw.Content = value[0];
+                    list.Add(asw);
+                }
+                
+            }
+
+            using (Models.FormContext ctx = new Models.FormContext())
+            {
+                foreach (Answer answer in list)
+                {
+                    ctx.Answers.Add(answer);
+                    
+                }
+                ctx.SaveChanges();
+            }
+
+
+            return View();
+        }
       
 
 
