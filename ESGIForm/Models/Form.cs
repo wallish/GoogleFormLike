@@ -16,9 +16,9 @@ namespace ESGIForm.Models
         public string DateInsert { get; set; }
         public string DateUpdate { get; set; }
         public User User { get; set; }
-        public static ICollection<Question> ListQuestion { get; set; }
+        public  ICollection<Question> ListQuestion { get; set; }
 
-      
+       
 
     }
 }

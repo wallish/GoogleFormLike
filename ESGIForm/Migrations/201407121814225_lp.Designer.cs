@@ -7,13 +7,13 @@ namespace ESGIForm.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
-    public sealed partial class ea : IMigrationMetadata
+    public sealed partial class lp : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ea));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(lp));
         
         string IMigrationMetadata.Id
         {
-            get { return "201406221242327_ea"; }
+            get { return "201407121814225_lp"; }
         }
         
         string IMigrationMetadata.Source

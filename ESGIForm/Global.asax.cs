@@ -12,6 +12,7 @@ namespace ESGIForm
     // visit http://go.microsoft.com/?LinkId=9394801
     public class MvcApplication : System.Web.HttpApplication
     {
+     
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -20,5 +21,7 @@ namespace ESGIForm
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
+
+        
     }
 }

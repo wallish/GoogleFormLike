@@ -124,21 +124,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201406221237093_tata.cs" />
-    <Compile Include="Migrations\201406221237093_tata.Designer.cs">
-      <DependentUpon>201406221237093_tata.cs</DependentUpon>
+    <Compile Include="Migrations\201407121813096_lst.cs" />
+    <Compile Include="Migrations\201407121813096_lst.Designer.cs">
+      <DependentUpon>201407121813096_lst.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201406221242327_ea.cs" />
-    <Compile Include="Migrations\201406221242327_ea.Designer.cs">
-      <DependentUpon>201406221242327_ea.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407120958034_new.cs" />
-    <Compile Include="Migrations\201407120958034_new.Designer.cs">
-      <DependentUpon>201407120958034_new.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407121207401_formid.cs" />
-    <Compile Include="Migrations\201407121207401_formid.Designer.cs">
-      <DependentUpon>201407121207401_formid.cs</DependentUpon>
+    <Compile Include="Migrations\201407121814225_lp.cs" />
+    <Compile Include="Migrations\201407121814225_lp.Designer.cs">
+      <DependentUpon>201407121814225_lp.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Form.cs" />
@@ -483,6 +475,7 @@
     <Content Include="Views\Form\List.cshtml" />
     <Content Include="Views\Form\Add.cshtml" />
     <Content Include="Views\Form\Show.cshtml" />
+    <Content Include="Views\Form\Share.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -536,17 +529,11 @@
     <Content Include="Scripts\angular.min.js.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201406221237093_tata.resx">
-      <DependentUpon>201406221237093_tata.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201407121813096_lst.resx">
+      <DependentUpon>201407121813096_lst.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201406221242327_ea.resx">
-      <DependentUpon>201406221242327_ea.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407120958034_new.resx">
-      <DependentUpon>201407120958034_new.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407121207401_formid.resx">
-      <DependentUpon>201407121207401_formid.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201407121814225_lp.resx">
+      <DependentUpon>201407121814225_lp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -47,52 +47,72 @@ namespace ESGIForm.Controllers
         [HttpPost]
         public JsonResult Add(Question question)
         {
-            /*using (Models.FormContext ctx = new Models.FormContext())
+            
+            List<Question> foo;
+            using (Models.FormContext ctx = new Models.FormContext())
             {
                 question.QuestionId = Guid.NewGuid();
-                ctx.Questions.Add(que   stion);
+                question.DateInsert = DateTime.Now;
+                ctx.Questions.Add(question);
                 ctx.SaveChanges();
-            }*/
-            
-            if (!string.IsNullOrEmpty(Request.Form["close"]))
-            {
-                question.QuestionId = Guid.NewGuid();
-            }
-            question.QuestionId = Guid.NewGuid();
 
-            
-            lstq.Add(question);
-            return Json(lstq, JsonRequestBehavior.AllowGet);
+                foo = new List<Question>(ctx.Questions.Where(q => q.FormId == question.FormId)).OrderBy(q => q.DateInsert).ToList();
+            }
+
+            return Json(foo, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult List()
+        public JsonResult List(Guid guid)
         {
-            return Json(lstq, JsonRequestBehavior.AllowGet);
+            List<Question> foo;
+            using (Models.FormContext ctx = new Models.FormContext())
+            {
+                foo = new List<Question>(ctx.Questions.Where(q => q.FormId == guid)).OrderBy(q => q.DateInsert).ToList();
+            }
+
+            return Json(foo, JsonRequestBehavior.AllowGet);
         }
 
        
 
         public bool Delete(Question question)
         {
-            Question q2 = lstq.Where(q => q.QuestionId == question.QuestionId).FirstOrDefault();
+            /*Question q2 = lstq.Where(q => q.QuestionId == question.QuestionId).FirstOrDefault();
             if (q2 != null)
             {
                 lstq.Remove(q2);
+            }*/
+            //List<Question> foo;
+            using (Models.FormContext ctx = new Models.FormContext())
+            {
+                Question qtoremove = ctx.Questions.Where(q => q.QuestionId == question.QuestionId).FirstOrDefault();
+                ctx.Questions.Remove(qtoremove);
+                ctx.SaveChanges();
+
             }
+
             return true;
         }
 
         [HttpPut]
         public ActionResult Edit(Question question)
         {
-            foreach(var q in lstq){
+            /*foreach(var q in lstq){
                 if(q.QuestionId == question.QuestionId)
                 {
                     q.Title = question.Title;
                 }
             }
 
-            var toto = lstq;
+            var toto = lstq;*/
+
+            using (Models.FormContext ctx = new Models.FormContext())
+            {
+                Question qtoupdate = ctx.Questions.Where(q => q.QuestionId == question.QuestionId).FirstOrDefault();
+                qtoupdate.Title = question.Title;
+                ctx.SaveChanges();
+
+            }
             return View();
 
         }
@@ -111,20 +131,33 @@ namespace ESGIForm.Controllers
                      ctx.SaveChanges();
                  }
             }
-            // récupérer le formulaire
-            // changer le activate à true
-            // rediriger vers la page d'url
 
-            return RedirectToAction("Show",form);
+            return RedirectToAction("Share", "Form", form);
         }
 
-        public ActionResult Show(Form form)
+        public ActionResult Share(Form guid)
         {
+            return View(guid);
+        }
 
-            var toto = form;
+        public ActionResult Show(string hash)
+        {
+            Form form;
+            List<Question> listquestions = new List<Question>() { };
+            using (var ctx = new Models.FormContext())
+            {
+                form = ctx.Forms.Where(f => f.Hash == hash).FirstOrDefault();
+                if (form != null)
+                {
+                    listquestions = ctx.Questions.Where(q => q.FormId == form.FormId).OrderBy(q => q.DateInsert).ToList();
+                }
+            }
+
+            //form.setList(listquestions);
+            form.ListQuestion = listquestions;
+
             return View(form);
         }
-
       
 
 

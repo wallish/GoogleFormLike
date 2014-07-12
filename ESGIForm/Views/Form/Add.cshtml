@@ -68,7 +68,10 @@
 
             @* Close *@
             <div>
-                <button value="close" ng-click="close('@Model.FormId')" type="submit">Fermer</button>
+                <form action="/form/close" method="post">
+                    <input type="hidden" name="guid" value="@Model.FormId" />
+                    <button value="close"  type="submit">Fermer</button>
+                </form>
             </div>
         </div>
 
@@ -77,7 +80,6 @@
 
         <script type="text/javascript">
             var app = angular.module('TodoManager', []);
-
             app.controller('MainCtrl', function ($scope, $http) {
 
                 $scope.delete = function (itemToDelete) {
@@ -111,7 +113,8 @@
                          });
                 };
 
-                $http.get('/Form/List')
+
+                $http.get('/Form/List', {params: {guid: "@Model.FormId"}})
                     .success(function (res, a, b, c) {
                         $scope.todos = res;
                         console.log(res);
