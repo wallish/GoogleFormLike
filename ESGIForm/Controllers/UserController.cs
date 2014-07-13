@@ -22,7 +22,6 @@ namespace ESGIForm.Controllers
             return View(new User());
         }
 
-
         [HttpPost]
         public ActionResult Add(User user)
         {
@@ -37,13 +36,10 @@ namespace ESGIForm.Controllers
 
         }
 
-    
-
         public ActionResult Show(User user){
 
             return View(user);
         }
-
 
         public IEnumerable<User> GetAllUsers()
         {
@@ -55,7 +51,6 @@ namespace ESGIForm.Controllers
             return res;
         }
 
-      
         public User GetUser(Guid id)
         {
             User user = null;

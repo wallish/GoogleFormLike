@@ -14,20 +14,72 @@ namespace ESGIForm.Controllers
 
         public ActionResult Index()
         {
-            /*using (var ctx = new Models.FormContext())
+            return View();
+        }
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(User u)
+        {
+            using (var ctx = new Models.FormContext())
             {
-                User user = new User();
-                user.UserId = Guid.NewGuid();
-                user.Username = "popolito";
-                user.Nom = "popo";
-                user.Prenom = "lito";
-                ctx.Users.Add(user);
+                u.UserId = Guid.NewGuid();
+                ctx.Users.Add(u);
                 ctx.SaveChanges();
 
-            }*/
+                return RedirectToAction("Login");
+            }
+            
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(User usr)
+        {
 
+            using (var ctx = new Models.FormContext())
+            {
+                var user = ctx.Users.Where(u => u.Username.Equals(usr.Username) && u.Password.Equals(usr.Password)).FirstOrDefault();
+                if (user != null)
+                {
+                    Session["UserID"] = user.UserId.ToString();
+                    Session["UserName"] = user.Username.ToString();
+                    return RedirectToAction("Panel");
+                }
+            
+            
+            }
 
             return View();
+        }
+
+        public ActionResult Panel()
+        {
+            if (Session["UserID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+        }
+
+        public ActionResult Disonnect()
+        {
+            if (Session["UserID"] == null) return RedirectToAction("Login", "Home");
+            Session["UserId"] = null;
+            Session["Username"] = null;
+
+            return RedirectToAction("Login");
         }
 
     

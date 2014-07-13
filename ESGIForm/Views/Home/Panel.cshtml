@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Panel";
+}
+
+<h2>Panel utilisateur @Session["Username"]</h2>
+
+@Html.ActionLink("Add user", "Add", "User")
+<br />
+@Html.ActionLink("Add form", "New", "Form")
+<br />
+@Html.ActionLink("Create form", "Add", "Form")
+
+@Html.ActionLink("Déconnexion", "Disonnect", "Home")

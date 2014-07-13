@@ -140,6 +140,14 @@
     <Compile Include="Migrations\201407121921158_toto.Designer.cs">
       <DependentUpon>201407121921158_toto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201407131042399_user.cs" />
+    <Compile Include="Migrations\201407131042399_user.Designer.cs">
+      <DependentUpon>201407131042399_user.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407131047073_required.cs" />
+    <Compile Include="Migrations\201407131047073_required.Designer.cs">
+      <DependentUpon>201407131047073_required.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\Form.cs" />
@@ -485,6 +493,10 @@
     <Content Include="Views\Form\Add.cshtml" />
     <Content Include="Views\Form\Show.cshtml" />
     <Content Include="Views\Form\Share.cshtml" />
+    <Content Include="Views\Form\Edit.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Panel.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -549,6 +561,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201407121921158_toto.resx">
       <DependentUpon>201407121921158_toto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407131042399_user.resx">
+      <DependentUpon>201407131042399_user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407131047073_required.resx">
+      <DependentUpon>201407131047073_required.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

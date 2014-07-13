@@ -22,27 +22,82 @@ namespace ESGIForm.Controllers
 
         public ActionResult Add()
         {
-
+            if (Session["UserID"] == null) return RedirectToAction("Login", "Home");
             lstq = new List<Question>();
             Form form = new Form();
             
             using (var ctx = new Models.FormContext())
             {
-                Random random = new Random();
-                MD5 md5 = System.Security.Cryptography.MD5.Create();
+                // form data
                 form.FormId = Guid.NewGuid();
                 form.CloseDate = DateTime.Now;
                 form.DateInsert = DateTime.Now.ToString();
                 form.DateUpdate = DateTime.Now.ToString();
-                //form.User = user;
-                var foo = random.Next();
-                form.Hash = foo.ToString();
+                // add user
+                Guid guid = new Guid(Session["UserID"].ToString());
+                User user = ctx.Users.Where(u => u.UserId.Equals(guid)).FirstOrDefault();
+                form.User = user;
+                // generate hash
+                Random random = new Random();
+                var hash = random.Next();
+                form.Hash = hash.ToString();
+
                 ctx.Forms.Add(form);
                 ctx.SaveChanges();
             }
 
             return View(form);
         }
+
+        public ActionResult Edit()
+        {
+            //if (Session["UserID"] == null) return RedirectToAction("Login", "Home");
+            List<Question> lstq = new List<Question>();
+            string foo = "f5413e73-7c9c-4c82-9790-89d3dca2eba2";
+            Guid guid = new Guid(foo);
+            Form form;
+            using (Models.FormContext ctx = new Models.FormContext())
+            {
+                form = ctx.Forms.Where(f => f.FormId == guid).FirstOrDefault();
+                lstq = new List<Question>(ctx.Questions.Where(q => q.FormId == guid)).OrderBy(q => q.DateInsert).ToList();
+            }
+
+            return View(form);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Form formupdate)
+        {
+            /*List<Question> lstq = new List<Question>();
+            string foo = "f5413e73-7c9c-4c82-9790-89d3dca2eba2";
+            Guid guid = new Guid(foo);*/
+
+            using (Models.FormContext ctx = new Models.FormContext())
+            {
+                Form form = ctx.Forms.Where(f => f.FormId == formupdate.FormId).FirstOrDefault();
+                form.Description = formupdate.Description;
+                form.Title = formupdate.Title;
+
+                ctx.SaveChanges();
+            }
+
+            return View();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         [HttpPost]
         public JsonResult Add(Question question)
@@ -77,12 +132,6 @@ namespace ESGIForm.Controllers
 
         public bool Delete(Question question)
         {
-            /*Question q2 = lstq.Where(q => q.QuestionId == question.QuestionId).FirstOrDefault();
-            if (q2 != null)
-            {
-                lstq.Remove(q2);
-            }*/
-            //List<Question> foo;
             using (Models.FormContext ctx = new Models.FormContext())
             {
                 Question qtoremove = ctx.Questions.Where(q => q.QuestionId == question.QuestionId).FirstOrDefault();
@@ -97,15 +146,6 @@ namespace ESGIForm.Controllers
         [HttpPut]
         public ActionResult Edit(Question question)
         {
-            /*foreach(var q in lstq){
-                if(q.QuestionId == question.QuestionId)
-                {
-                    q.Title = question.Title;
-                }
-            }
-
-            var toto = lstq;*/
-
             using (Models.FormContext ctx = new Models.FormContext())
             {
                 Question qtoupdate = ctx.Questions.Where(q => q.QuestionId == question.QuestionId).FirstOrDefault();
@@ -162,7 +202,6 @@ namespace ESGIForm.Controllers
         [HttpPost]
         public ActionResult Show()
         {
-           // var test = Form;
             List<Answer> list = new List<Answer>();
             
             foreach (string key in Request.Form.AllKeys)
@@ -192,8 +231,23 @@ namespace ESGIForm.Controllers
 
             return View();
         }
-      
 
+        public ActionResult MyForms()
+        {
+            if (Session["UserID"] == null) return RedirectToAction("Login","Home");
+            List<Form> forms = new List<Form>() { };
+            using (var ctx = new Models.FormContext())
+            {
+                Guid guid = new Guid(Session["UserID"].ToString());
+                User user = ctx.Users.Where(u => u.UserId.Equals(guid)).FirstOrDefault();
+                forms = ctx.Forms.Where(f => f.User.UserId == user.UserId).ToList();
+                if (forms != null)
+                {
+                    return View(forms);
+                }
+            }
+            return View();
+        }
 
     }
 }

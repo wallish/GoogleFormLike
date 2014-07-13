@@ -9,9 +9,12 @@ namespace ESGIForm.Models
     public class User
     {
         public Guid UserId { get; set; }
+        [Required(ErrorMessage="Veuillez fournir un nom d'utilisateur",AllowEmptyStrings=false)]
         public string Username { get; set; }
         public string Lastname { get; set; }
         public string Firstname { get; set; }
+        [Required(ErrorMessage = "Veuillez fournir un nom d'utilisateur", AllowEmptyStrings = false)]
+        public string Password { get; set; }
 
 
         public User GetUser(){

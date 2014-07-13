@@ -39,3 +39,5 @@ C:\Users\Nirundth\Documents\Visual Studio 2013\Projects\ESGIForm\ESGIForm\obj\De
 C:\Users\Nirundth\Documents\Visual Studio 2013\Projects\ESGIForm\ESGIForm\obj\Debug\ESGIForm.Migrations.lp.resources
 C:\Users\Nirundth\Documents\Visual Studio 2013\Projects\ESGIForm\ESGIForm\obj\Debug\ESGIForm.Migrations.asw.resources
 C:\Users\Nirundth\Documents\Visual Studio 2013\Projects\ESGIForm\ESGIForm\obj\Debug\ESGIForm.Migrations.toto.resources
+C:\Users\Nirundth\Documents\Visual Studio 2013\Projects\ESGIForm\ESGIForm\obj\Debug\ESGIForm.Migrations.user.resources
+C:\Users\Nirundth\Documents\Visual Studio 2013\Projects\ESGIForm\ESGIForm\obj\Debug\ESGIForm.Migrations.required.resources

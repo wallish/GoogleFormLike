@@ -1,0 +1,132 @@
+﻿@model ESGIForm.Models.Form
+<html>
+<head>
+    <title>TodoManager</title>
+    <style>
+        .barre {
+            text-decoration: line-through;
+        }
+    </style>
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div ng-app="TodoManager">
+        <div ng-controller="MainCtrl">
+
+            @* Information *@
+            <div>
+                <input type="text" ng-model="form.title" value="@Model.Title" /><br>
+                <input type="text" ng-model="form.description" value="@Model.Description" /><br>
+                <input type="text" ng-model="form.date" value="@Model.CloseDate" /><br>
+            </div>
+
+            @* Ajouter une question *@
+            <div>
+                title :
+                <input type="text" ng-model="newItem.Title" /><br>
+                <button ng-click="add(newItem)">Add</button>
+            </div>
+            @* Liste des questions *@
+            <ul>
+                <li ng-repeat="item in todos">
+                    <!-- Template Affichage -->
+                    <div ng-show="!edit">
+                        <input type="checkbox" ng-model="IsFinished" />
+                        <!--<span ng-class="{barre : IsFinished}">
+                            {{item.Title}}
+                        </span> -->
+                        <span ng-if="item.Title != null ">{{item.Title}}</span>
+                        <span ng-if="item.Title == null ">{{item[$index].Title}}</span>
+
+
+                        <input type="hidden" ng-model="item[$index].QuestionId" /><br>
+
+                        <button ng-click="edit = !edit">Edit</button>
+                    </div>
+                    <!-- Template Edition -->
+                    <div ng-show="edit" ng-if="item.Title == null">
+                        <input type="text" ng-model="item[$index].Title" /><br>
+                        <input type="hidden" ng-model="item[$index].QuestionId" /><br>
+
+                        <button ng-click="delete({QuestionId : item[$index].QuestionId, Index : $index});edit = !edit">Delete</button>
+                        <button ng-click="save(item[$index]);edit = !edit">Save</button>
+                    </div>
+
+                    <div ng-show="edit" ng-if="item.Title != null">
+                        <input type="text" ng-model="item.Title" /><br>
+                        <input type="hidden" ng-model="item.QuestionId" /><br>
+
+                        <button ng-click="delete({QuestionId : item.QuestionId, Index : $index});edit = !edit">Delete</button>
+                        <button ng-click="save(item);edit = !edit">Save</button>
+                    </div>
+
+                </li>
+            </ul>
+
+            @* Close *@
+            <div>
+                <form action="/form/close" method="post">
+                    <input type="hidden" name="guid" value="@Model.FormId" />
+                    <button value="close" type="submit">Valider</button>
+                </form>
+                <button ng-click="saveform(form)">Save</button>
+
+            </div>
+        </div>
+
+        <script src="~/Scripts/angular.js"></script>
+        <script src="~/Scripts/angular-ui/ui-bootstrap.js"></script>
+
+        <script type="text/javascript">
+    var app = angular.module('TodoManager', []);
+    app.controller('MainCtrl', function ($scope, $http) {
+
+        $scope.delete = function (itemToDelete) {
+            $http.post('/Form/Delete/', itemToDelete)
+                .success(function (res, a, b, c) {
+                    $scope.todos.splice(itemToDelete.Index, 1);
+                });
+        };
+
+        $scope.save = function (itemToUpdate) {
+            $http.put('/Form/Edit', itemToUpdate)
+                 .success(function (res, a, b, c) {
+                 });
+        };
+
+
+
+        $scope.add = function (newItem) {
+            newItem.FormId = "@Model.FormId";
+            $http.post('/Form/Add', newItem)
+                 .success(function (res, a, b, c) {
+                     $scope.todos.push(res);
+                 });
+        };
+
+        $scope.close = function (guid) {
+            $http.post('/Form/Close', { 'guid': "@Model.FormId" })
+                 .success(function (res, a, b, c) {
+                 });
+        };
+
+        $scope.saveform = function (form) {
+            form.FormId = "@Model.FormId";
+            $http.post('/Form/Edit', form)
+                 .success(function (res, a, b, c) {
+                 });
+        };
+
+        $http.get('/Form/List', { params: { guid: "@Model.FormId" } })
+            .success(function (res, a, b, c) {
+                $scope.todos = res;
+                console.log(res);
+            });
+    });
+
+        </script>
+</body>
+</html>
+
