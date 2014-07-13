@@ -46,6 +46,10 @@
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -71,9 +75,6 @@
     <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
       <Private>True</Private>
@@ -120,33 +121,18 @@
   <ItemGroup>
     <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StatController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201407121813096_lst.cs" />
-    <Compile Include="Migrations\201407121813096_lst.Designer.cs">
-      <DependentUpon>201407121813096_lst.cs</DependentUpon>
+    <Compile Include="Migrations\201407131454502_dzdef.cs" />
+    <Compile Include="Migrations\201407131454502_dzdef.Designer.cs">
+      <DependentUpon>201407131454502_dzdef.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201407121814225_lp.cs" />
-    <Compile Include="Migrations\201407121814225_lp.Designer.cs">
-      <DependentUpon>201407121814225_lp.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407121910388_asw.cs" />
-    <Compile Include="Migrations\201407121910388_asw.Designer.cs">
-      <DependentUpon>201407121910388_asw.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407121921158_toto.cs" />
-    <Compile Include="Migrations\201407121921158_toto.Designer.cs">
-      <DependentUpon>201407121921158_toto.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407131042399_user.cs" />
-    <Compile Include="Migrations\201407131042399_user.Designer.cs">
-      <DependentUpon>201407131042399_user.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407131047073_required.cs" />
-    <Compile Include="Migrations\201407131047073_required.Designer.cs">
-      <DependentUpon>201407131047073_required.cs</DependentUpon>
+    <Compile Include="Migrations\201407131500148_formid.cs" />
+    <Compile Include="Migrations\201407131500148_formid.Designer.cs">
+      <DependentUpon>201407131500148_formid.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -497,6 +483,8 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Panel.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Stat\Index.cshtml" />
+    <Content Include="Views\Form\Summary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -550,23 +538,11 @@
     <Content Include="Scripts\angular.min.js.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201407121813096_lst.resx">
-      <DependentUpon>201407121813096_lst.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201407131454502_dzdef.resx">
+      <DependentUpon>201407131454502_dzdef.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407121814225_lp.resx">
-      <DependentUpon>201407121814225_lp.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407121910388_asw.resx">
-      <DependentUpon>201407121910388_asw.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407121921158_toto.resx">
-      <DependentUpon>201407121921158_toto.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407131042399_user.resx">
-      <DependentUpon>201407131042399_user.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407131047073_required.resx">
-      <DependentUpon>201407131047073_required.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201407131500148_formid.resx">
+      <DependentUpon>201407131500148_formid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -15,5 +15,6 @@ namespace ESGIForm.Models
         public string Value { get; set; }
         public DateTime DateInsert { get; set; }
         public Guid FormId { get; set; }
+
     }
 }

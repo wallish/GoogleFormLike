@@ -9,6 +9,7 @@ namespace ESGIForm.Models
     {
         public Guid AnswerId { get; set; }
         public Guid QuestionId { get; set; }
+        public Guid FormId { get; set; }
         public string Content { get; set; }
     }
 }

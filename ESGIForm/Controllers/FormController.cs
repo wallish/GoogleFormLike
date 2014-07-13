@@ -203,16 +203,22 @@ namespace ESGIForm.Controllers
         public ActionResult Show()
         {
             List<Answer> list = new List<Answer>();
-            
+            Guid formid = Guid.NewGuid();
+            Form form;
             foreach (string key in Request.Form.AllKeys)
             {
-                if (key != "validate")
+                if (key != "validate" && key !=  "formid")
                 {
                     string[] value = Request.Form.GetValues(key);
+                    string[] form_id = Request.Form.GetValues("formid");
                     Answer asw = new Answer();
                     asw.AnswerId = Guid.NewGuid();
-                    asw.QuestionId = new Guid(key);
+                    Guid guid = new Guid(key);
+                    asw.QuestionId = guid;
                     asw.Content = value[0];
+                    formid = new Guid(form_id[0]);
+                    asw.FormId = formid;
+                    
                     list.Add(asw);
                 }
                 
@@ -220,6 +226,7 @@ namespace ESGIForm.Controllers
 
             using (Models.FormContext ctx = new Models.FormContext())
             {
+                form = ctx.Forms.Where(f => f.FormId == formid).FirstOrDefault();
                 foreach (Answer answer in list)
                 {
                     ctx.Answers.Add(answer);
@@ -229,7 +236,7 @@ namespace ESGIForm.Controllers
             }
 
 
-            return View();
+            return RedirectToAction("Summary","Form",form);
         }
 
         public ActionResult MyForms()
@@ -247,6 +254,11 @@ namespace ESGIForm.Controllers
                 }
             }
             return View();
+        }
+
+        public ActionResult Summary(Form form)
+        {
+            return View(form);
         }
 
     }
