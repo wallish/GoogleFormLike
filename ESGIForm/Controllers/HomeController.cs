@@ -65,7 +65,15 @@ namespace ESGIForm.Controllers
         {
             if (Session["UserID"] != null)
             {
-                return View();
+                List<Form> forms = new List<Form>();
+                using (var ctx = new Models.FormContext())
+                {
+                    Guid guid = new Guid(Session["UserID"].ToString());
+                    User user = ctx.Users.Where(u => u.UserId == guid).FirstOrDefault();
+                    forms = ctx.Forms.Where(f => f.User.UserId == user.UserId).OrderBy(f => f.DateInsert).ToList();
+                }
+
+                return View(forms);
             }
             else
             {

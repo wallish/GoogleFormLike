@@ -11,20 +11,22 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
 </head>
+@if (Model != null) { 
 <body>
-    <div ng-app="TodoManager">
-        <div ng-controller="MainCtrl">
+    <div ng-app="TodoManagerr">
+        <div ng-controller="MainCtrll">
 
             @* Information *@
             <div>
-                <input type="text" ng-model="form.title" value="@Model.Title" /><br>
-                <input type="text" ng-model="form.description" value="@Model.Description" /><br>
-                <input type="text" ng-model="form.date" value="@Model.CloseDate" /><br>
+               Titre : <input type="text" ng-model="form.title" value="'@Model.Title'" name="foo"/><br>@Model.Title
+               Description : <input type="text" ng-model="form.description" value="@Model.Description" /><br>
+                Date de cloture : <input type="text" ng-model="form.date" value="@Model.CloseDate" /><br>
+               Date de cloture : <input type="text" ng-model="form.date" value="@Model.CloseDate" /><br>
             </div>
 
             @* Ajouter une question *@
             <div>
-                title :
+                Question :
                 <input type="text" ng-model="newItem.Title" /><br>
                 <button ng-click="add(newItem)">Add</button>
             </div>
@@ -33,7 +35,7 @@
                 <li ng-repeat="item in todos">
                     <!-- Template Affichage -->
                     <div ng-show="!edit">
-                        <input type="checkbox" ng-model="IsFinished" />
+                      
                         <!--<span ng-class="{barre : IsFinished}">
                             {{item.Title}}
                         </span> -->
@@ -80,8 +82,8 @@
         <script src="~/Scripts/angular-ui/ui-bootstrap.js"></script>
 
         <script type="text/javascript">
-    var app = angular.module('TodoManager', []);
-    app.controller('MainCtrl', function ($scope, $http) {
+    var app = angular.module('TodoManagerr', []);
+    app.controller('MainCtrll', function ($scope, $http) {
 
         $scope.delete = function (itemToDelete) {
             $http.post('/Form/Delete/', itemToDelete)
@@ -94,6 +96,7 @@
             $http.put('/Form/Edit', itemToUpdate)
                  .success(function (res, a, b, c) {
                  });
+            
         };
 
 
@@ -128,5 +131,6 @@
 
         </script>
 </body>
+}
 </html>
 

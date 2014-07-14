@@ -1,13 +1,26 @@
-﻿@{
-    ViewBag.Title = "Panel";
-}
-
+﻿
 <h2>Panel utilisateur @Session["Username"]</h2>
 
-@Html.ActionLink("Add user", "Add", "User")
-<br />
-@Html.ActionLink("Add form", "New", "Form")
-<br />
 @Html.ActionLink("Create form", "Add", "Form")
-
+<br />
 @Html.ActionLink("Déconnexion", "Disonnect", "Home")
+
+<table>
+    <tr>
+        <td>Title</td>
+        <td>Date de cloture</td>
+        <td>Action</td>
+    </tr>
+@foreach (@ESGIForm.Models.Form item in @Model)
+{
+    <tr>
+        <td>@item.Title</td>
+        <td>@item.CloseDate</td>
+        <td>@Html.ActionLink("edit", "Edit", new { controller = "Form", guid = @item.FormId })</td>
+        <td>@Html.ActionLink("delete", "Add", new { controller = "Form", guid = @item.FormId })</td>
+        <td>@Html.ActionLink("stat", "Add", new { controller = "Stat", guid = @item.FormId })</td>
+        
+
+    </tr>
+}
+</table>

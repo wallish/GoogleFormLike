@@ -18,9 +18,6 @@ namespace ESGIForm.Controllers
 
         public ActionResult Index()
         {
-            
-
-
             JArray array = new JArray();
             array.Add("Manual text");
             array.Add(new DateTime(2000, 5, 23));
