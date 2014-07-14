@@ -194,7 +194,11 @@ namespace ESGIForm.Controllers
             }
 
             //form.setList(listquestions);
-            form.ListQuestion = listquestions;
+            if (listquestions != null)
+            {
+                form.ListQuestion = listquestions;
+
+            }
 
             return View(form);
         }

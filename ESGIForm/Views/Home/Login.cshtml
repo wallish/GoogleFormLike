@@ -2,40 +2,27 @@
 
 @{
     ViewBag.Title = "Login";
-}
-
-<h2>Login</h2>
-
-@using(Html.BeginForm("Login","Home",FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    
-   <table>
-        <tr>
-            <td>@Html.LabelFor(a=>a.Username)</td>
-            <td>@Html.TextBoxFor(a=>a.Username)</td>
-            <td>@Html.ValidationMessageFor(a=>a.Username)</td>
-        </tr>
-        <tr>
-            <td>
-                @Html.LabelFor(a=>a.Password)
-            </td>
-            <td>
-                @Html.PasswordFor(a=>a.Password)
-            </td>
-            <td>
-                @Html.ValidationMessageFor(a=>a.Password)
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" value="Login" />
-            </td>
-            <td></td>
-        </tr>
-    </table>
-    
+    Layout = "~/Views/Shared/layout.cshtml";
     
 }
+
+<div class="container">
+    @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "form-signin" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <h2 class="form-signin-heading">Connectez-vous</h2>
+        
+        @Html.LabelFor(a => a.Username)
+        @Html.TextBoxFor(a => a.Username, new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.Username)<br />
+            
+        @Html.LabelFor(a => a.Password)
+                
+        @Html.PasswordFor(a => a.Password, new { @class = "form-control" })
+                
+        @Html.ValidationMessageFor(a => a.Password)
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
+
+    }
+</div>

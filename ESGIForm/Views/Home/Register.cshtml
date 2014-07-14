@@ -2,43 +2,30 @@
 
 @{
     ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/layout.cshtml";
 }
 
-<h2>Register</h2>
+<div class="container">
+    @using (Html.BeginForm("Register", "Home", FormMethod.Post, new { @class = "form-signin" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <h2 class="form-signin-heading">Création d'un compte</h2>
+        
+        @Html.LabelFor(a => a.Username)
+        @Html.TextBoxFor(a => a.Username, new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.Username)
 
-@using (Html.BeginForm("Register", "Home", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+        @Html.LabelFor(a => a.Firstname)
+        @Html.TextBoxFor(a => a.Firstname, new { @class = "form-control" })
+        @Html.LabelFor(a => a.Lastname)
+        @Html.TextBoxFor(a => a.Lastname, new { @class = "form-control" })
 
-    <table>
-        <tr>
-            <td>@Html.LabelFor(a => a.Username)</td>
-            <td>@Html.TextBoxFor(a => a.Username)</td>
-            <td>@Html.ValidationMessageFor(a => a.Username)</td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(a => a.Firstname)</td>
-            <td>@Html.TextBoxFor(a => a.Firstname)</td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(a => a.Lastname)</td>
-            <td>@Html.TextBoxFor(a => a.Lastname)</td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(a => a.Password)</td>
-            <td>@Html.PasswordFor(a => a.Password)</td>
-            <td> @Html.ValidationMessageFor(a => a.Password)</td>
-        </tr>
-
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" value="Register" />
-            </td>
-            <td></td>
-        </tr>
-    </table>
-
-
-}
+        @Html.LabelFor(a => a.Password)
+        @Html.PasswordFor(a => a.Password, new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.Password)
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Créer</button>
+        
+    }
+</div>

@@ -1,5 +1,14 @@
-﻿Bienvenu sur le formulaire en ligne
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/layout.cshtml";
 
-@Html.ActionLink("Login", "Login", "Home")
-<br />
-@Html.ActionLink("Register", "Register", "Home")
+}
+<h2 style="margin-left: auto; margin-right: auto;width:500px">Bienvenue sur le formulaire en ligne</h2>
+
+<div class="container">
+    <div class="form-signin">
+
+         @Html.ActionLink("Login", "Login", "Home", null, new { @class = Html.Raw("btn btn-lg btn-success btn-block") })
+         @Html.ActionLink("Register", "Register", "Home", null, new { @class = Html.Raw("btn btn-lg btn-primary btn-block") })
+    </div>
+</div>

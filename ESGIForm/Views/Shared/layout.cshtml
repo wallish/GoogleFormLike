@@ -5,9 +5,23 @@
 
 
 <html>
+<head>
+    <title></title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/global.css" rel="stylesheet" />
+
+</head>
+
 <body>
-    <p>This is header text</p>
+    <header>
+        <nav class="navbar navbar-inverse" role="navigation">
+            <a class="navbar-brand" href="#">Home</a>
+            @if (Session["Username"] != null) { 
+                <a class="navbar-brand navbar-right" href="/home/index">Panel</a>
+                <a class="navbar-brand navbar-right" href="/home/disonnect">Deconnexion</a>
+            }
+        </nav>
+    </header>
     @RenderBody()
-    <p>&copy; 2014 W3Schools. All rights reserved.</p>
 </body>
 </html> 

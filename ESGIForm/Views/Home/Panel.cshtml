@@ -1,11 +1,63 @@
-﻿
-<h2>Panel utilisateur @Session["Username"]</h2>
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/layout.cshtml";
 
-@Html.ActionLink("Create form", "Add", "Form")
-<br />
-@Html.ActionLink("Déconnexion", "Disonnect", "Home")
+}
+<h2>Backoffice utilisateur</h2>
+<a href="@Url.Action("Add", "Form")">
+    <button type="button" class="btn btn-success btn-sm">
+        <span class="glyphicon glyphicon-pencil">
+        </span> Ajouter un formulaire
+    </button>
+</a>
+<div class="table-responsive" style="width:1000px;margin:0 auto">
+    <table class="table">
+        <tr>
+            <td>Title</td>
+            <td>Date de cloture</td>
+            <td>Action</td>
+            <td>Status</td>
+        </tr>
+        @foreach (@ESGIForm.Models.Form item in @Model)
+        {
+            <tr>
+                <td class="active">@item.Title</td>
+                <td class="active">@item.CloseDate</td>
+                <td class="active">
+                    <a href="@Url.Action("Edit", "Form", new { guid = @item.FormId })">
+                        <button type="button" class="btn btn-warning btn-sm">
+                            <span class="glyphicon glyphicon-pencil">
+                            </span> Modifier
+                        </button>
+                    </a>
+                    <a href="@Url.Action("Delete", "Form", new { guid = @item.FormId })">
+                        <button type="button" class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove">
+                            </span> Supprimer
+                        </button>
+                    </a>
+                    <a href="@Url.Action("Show", "Stat", new { guid = @item.FormId })">
+                        <button type="button" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-stats">
+                            </span> Stat
+                        </button>
+                    </a>
+                </td>
+                @if (@item.Status == "1"){
+                    <td class="success">Publié</td>
+                }
+                else
+                {
+                    <td class="warning">Brouillon</td>
+                }
+            </tr>
+        }
 
-<table>
+    </table>
+</div>
+
+
+@*<table>
     <tr>
         <td>Title</td>
         <td>Date de cloture</td>
@@ -19,8 +71,9 @@
         <td>@Html.ActionLink("edit", "Edit", new { controller = "Form", guid = @item.FormId })</td>
         <td>@Html.ActionLink("delete", "Add", new { controller = "Form", guid = @item.FormId })</td>
         <td>@Html.ActionLink("stat", "Add", new { controller = "Stat", guid = @item.FormId })</td>
+        <td>@Url.Action("Edit", "Form", new { guid = @item.FormId })</td>
         
 
     </tr>
 }
-</table>
+</table>*@
