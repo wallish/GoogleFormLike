@@ -27,12 +27,12 @@ namespace ESGIForm.Controllers
             return View();
         }
 
-        public ActionResult Show()
+        public JsonResult Show(Guid guid)
         {
             List<Answer> answers = new List<Answer>();
 
-            string bar = "c2ba17ff-4df5-46cb-b385-86e76ac2ebc7"; //debug
-            Guid guid = new Guid(bar);
+            /*string bar = "c2ba17ff-4df5-46cb-b385-86e76ac2ebc7"; //debug
+            Guid guid = new Guid(bar);*/
             Form form;
             List<Question> questions = new List<Question>();
             List<Answer> answer = new List<Answer>();
@@ -57,8 +57,12 @@ namespace ESGIForm.Controllers
             }
 
 
-            return View(json);
+            return Json(json, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult debug()
+        {
+            return View();
+        }
     }
 }

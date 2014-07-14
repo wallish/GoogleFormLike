@@ -49,12 +49,12 @@ namespace ESGIForm.Controllers
             return View(form);
         }
 
-        public ActionResult Edit()
+        public ActionResult Edit(Guid guid)
         {
             //if (Session["UserID"] == null) return RedirectToAction("Login", "Home");
             List<Question> lstq = new List<Question>();
-            string foo = "f5413e73-7c9c-4c82-9790-89d3dca2eba2";
-            Guid guid = new Guid(foo);
+            /*string foo = "f5413e73-7c9c-4c82-9790-89d3dca2eba2";
+            Guid guid = new Guid(foo);*/
             Form form;
             using (Models.FormContext ctx = new Models.FormContext())
             {
@@ -68,54 +68,24 @@ namespace ESGIForm.Controllers
         [HttpPost]
         public ActionResult Edit(Form formupdate)
         {
-            /*List<Question> lstq = new List<Question>();
-            string foo = "f5413e73-7c9c-4c82-9790-89d3dca2eba2";
-            Guid guid = new Guid(foo);*/
-
+            
             using (Models.FormContext ctx = new Models.FormContext())
             {
                 Form form = ctx.Forms.Where(f => f.FormId == formupdate.FormId).FirstOrDefault();
                 form.Description = formupdate.Description;
                 form.Title = formupdate.Title;
+                DateTime dt = Convert.ToDateTime(formupdate.CloseDate);
+                form.CloseDate = dt;
 
                 ctx.SaveChanges();
+                ViewData["edit"] = "Mise à jour réussi";
+                return View("Edit",form);
             }
 
-            return View();
         }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        [HttpPost]
-        public JsonResult Add(Question question)
-        {
-            
-            List<Question> foo;
-            using (Models.FormContext ctx = new Models.FormContext())
-            {
-                question.QuestionId = Guid.NewGuid();
-                question.DateInsert = DateTime.Now;
-                ctx.Questions.Add(question);
-                ctx.SaveChanges();
-
-                foo = new List<Question>(ctx.Questions.Where(q => q.FormId == question.FormId)).OrderBy(q => q.DateInsert).ToList();
-            }
-
-            return Json(foo, JsonRequestBehavior.AllowGet);
-        }
 
         public JsonResult List(Guid guid)
         {
@@ -128,34 +98,6 @@ namespace ESGIForm.Controllers
             return Json(foo, JsonRequestBehavior.AllowGet);
         }
 
-       
-
-        public bool Delete(Question question)
-        {
-            using (Models.FormContext ctx = new Models.FormContext())
-            {
-                Question qtoremove = ctx.Questions.Where(q => q.QuestionId == question.QuestionId).FirstOrDefault();
-                ctx.Questions.Remove(qtoremove);
-                ctx.SaveChanges();
-
-            }
-
-            return true;
-        }
-
-        [HttpPut]
-        public ActionResult Edit(Question question)
-        {
-            using (Models.FormContext ctx = new Models.FormContext())
-            {
-                Question qtoupdate = ctx.Questions.Where(q => q.QuestionId == question.QuestionId).FirstOrDefault();
-                qtoupdate.Title = question.Title;
-                ctx.SaveChanges();
-
-            }
-            return View();
-
-        }
 
         [HttpPost]
         public ActionResult Close(Guid guid)
@@ -170,6 +112,7 @@ namespace ESGIForm.Controllers
                      form.Status = "1";
                      ctx.SaveChanges();
                  }
+                
             }
 
             return RedirectToAction("Share", "Form", form);
@@ -187,12 +130,14 @@ namespace ESGIForm.Controllers
             using (var ctx = new Models.FormContext())
             {
                 form = ctx.Forms.Where(f => f.Hash == hash).FirstOrDefault();
+                if (form.CloseDate < DateTime.Now)
+                    return RedirectToAction("Summary", form);
                 if (form != null)
                 {
                     listquestions = ctx.Questions.Where(q => q.FormId == form.FormId).OrderBy(q => q.DateInsert).ToList();
                 }
             }
-
+            
             //form.setList(listquestions);
             if (listquestions != null)
             {
@@ -263,6 +208,19 @@ namespace ESGIForm.Controllers
         public ActionResult Summary(Form form)
         {
             return View(form);
+        }
+
+        public ActionResult Delete(Guid guid)
+        {
+            using (Models.FormContext ctx = new Models.FormContext())
+            {
+                Form qtoremove = ctx.Forms.Where(f => f.FormId == guid).FirstOrDefault();
+                ctx.Forms.Remove(qtoremove);
+                ctx.SaveChanges();
+
+            }
+
+            return RedirectToAction("Panel","Home");
         }
 
     }

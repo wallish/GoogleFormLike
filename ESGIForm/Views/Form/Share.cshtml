@@ -1,4 +1,10 @@
 ﻿@model ESGIForm.Models.Form
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/layout.cshtml";
 
-<h2>Le formulaire a été crée. Vous pouvez partager ce formulaire au travers de ce lien</h2>
-<a href="http://localhost:60164/@Model.Hash">http://localhost:60164/@Model.Hash</a>
+}
+<div class="container">
+    <h2>Le formulaire a été crée. Vous pouvez partager ce formulaire au travers de ce lien</h2>
+    <a href="http://localhost:60164/@Model.Hash">http://localhost:60164/@Model.Hash</a>
+</div>

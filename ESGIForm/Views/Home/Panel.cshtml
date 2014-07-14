@@ -24,20 +24,26 @@
                 <td class="active">@item.Title</td>
                 <td class="active">@item.CloseDate</td>
                 <td class="active">
+                    <a href="@Url.Action("Show", "Form", new { hash = @item.Hash })">
+                        <button type="button" class="btn btn-primary btn-xs">
+                            <span class="glyphicon glyphicon-pencil">
+                            </span> Voir
+                        </button>
+                    </a>
                     <a href="@Url.Action("Edit", "Form", new { guid = @item.FormId })">
-                        <button type="button" class="btn btn-warning btn-sm">
+                        <button type="button" class="btn btn-warning btn-xs">
                             <span class="glyphicon glyphicon-pencil">
                             </span> Modifier
                         </button>
                     </a>
                     <a href="@Url.Action("Delete", "Form", new { guid = @item.FormId })">
-                        <button type="button" class="btn btn-danger btn-sm">
+                        <button type="button" class="btn btn-danger btn-xs">
                             <span class="glyphicon glyphicon-remove">
                             </span> Supprimer
                         </button>
                     </a>
                     <a href="@Url.Action("Show", "Stat", new { guid = @item.FormId })">
-                        <button type="button" class="btn btn-default btn-sm">
+                        <button type="button" class="btn btn-default btn-xs">
                             <span class="glyphicon glyphicon-stats">
                             </span> Stat
                         </button>

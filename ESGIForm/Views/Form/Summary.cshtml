@@ -1,7 +1,18 @@
 ﻿@model ESGIForm.Models.Form
 @{
-    ViewBag.Title = "Summary";
-}
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/layout.cshtml";
 
-<h1>@Model.Title</h1>
-<h2>Merci d'avoir répondu à ce formulaire</h2>
+}
+<div class="container">
+    @if (Model.CloseDate < DateTime.Now)
+    {
+        <h2>Le formulaire est expiré</h2>
+    }else if(@Model.Status != "1"){
+        <h2>Le formulaire n'est pas disponible</h2>
+    }
+    else
+    {
+        <h2>Merci d'avoir répondu à ce formulaire</h2>
+    }
+</div>

@@ -121,6 +121,7 @@
   <ItemGroup>
     <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\StatController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -133,6 +134,10 @@
     <Compile Include="Migrations\201407131500148_formid.cs" />
     <Compile Include="Migrations\201407131500148_formid.Designer.cs">
       <DependentUpon>201407131500148_formid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407141655025_toto.cs" />
+    <Compile Include="Migrations\201407141655025_toto.Designer.cs">
+      <DependentUpon>201407141655025_toto.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -487,6 +492,8 @@
     <Content Include="Views\Stat\Index.cshtml" />
     <Content Include="Views\Form\Summary.cshtml" />
     <Content Include="Views\Shared\layout.cshtml" />
+    <Content Include="Views\Stat\debug.cshtml" />
+    <Content Include="Views\Stat\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -545,6 +552,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201407131500148_formid.resx">
       <DependentUpon>201407131500148_formid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407141655025_toto.resx">
+      <DependentUpon>201407141655025_toto.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

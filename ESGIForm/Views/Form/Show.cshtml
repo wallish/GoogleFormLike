@@ -5,22 +5,29 @@
     {
         <h2>Le formulaire demandé n'existe pas</h2>
     }
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/layout.cshtml";
 }
 
+<div class="container" style="margin:0 auto;width:700px">
+    <h3>@Model.Title</h3><br />
+    Description : <span><i>@Model.Description</i></span>
 
-Description : <span>@Model.Description</span>
-
-@using (Html.BeginForm("Show", "Form", FormMethod.Post)){ 
-    foreach (var item in Model.ListQuestion)
+    @using (Html.BeginForm("Show", "Form", FormMethod.Post))
     {
-         <span>@item.Title</span><br />
-         <input type="radio" name="@item.QuestionId" value="oui" ><span>oui</span>
-         <input type="radio" name="@item.QuestionId" value="non"><span>non</span>
-         <br/>                                          
+        foreach (var item in Model.ListQuestion)
+        {
+                @Html.Label(@item.Title)<br />
+            <input type="radio" name="@item.QuestionId" value="oui" >@Html.Label("oui")
+            <input type="radio" name="@item.QuestionId" value="non" >@Html.Label("non")
+            <br />
+        }
+        <input type="hidden" value="@Model.FormId" name="formid" />
+    <center>
+        <button class="btn btn-lg btn-primary btn-sm" type="submit">Envoyer</button>
+    </center>
     }
-    <input type="hidden" value="@Model.FormId" name="formid" />
-    <button type="submit" name="validate" value="valider"></button>    
-}
 
 
-Date de cloture : <span>@Model.CloseDate</span>
+    Date de cloture : <span>@Model.CloseDate</span>
+</div>

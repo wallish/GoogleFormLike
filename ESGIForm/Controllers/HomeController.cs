@@ -70,7 +70,7 @@ namespace ESGIForm.Controllers
                 {
                     Guid guid = new Guid(Session["UserID"].ToString());
                     User user = ctx.Users.Where(u => u.UserId == guid).FirstOrDefault();
-                    forms = ctx.Forms.Where(f => f.User.UserId == user.UserId).OrderBy(f => f.DateInsert).ToList();
+                    forms = ctx.Forms.Where(f => f.User.UserId == user.UserId).OrderByDescending(f => f.DateInsert).ToList();
                 }
 
                 return View(forms);
