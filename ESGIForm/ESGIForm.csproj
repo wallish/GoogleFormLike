@@ -45,6 +45,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\packages\iTextSharp.5.5.1\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -121,6 +124,7 @@
   <ItemGroup>
     <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PdfController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\StatController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -494,9 +498,11 @@
     <Content Include="Views\Shared\layout.cshtml" />
     <Content Include="Views\Stat\debug.cshtml" />
     <Content Include="Views\Stat\Show.cshtml" />
+    <Content Include="Views\Pdf\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="pdf\pdf\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

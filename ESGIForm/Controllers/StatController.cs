@@ -27,7 +27,7 @@ namespace ESGIForm.Controllers
             return View();
         }
 
-        public JsonResult Show(Guid guid)
+        public JsonResult Data(Guid guid)
         {
             List<Answer> answers = new List<Answer>();
 
@@ -44,7 +44,7 @@ namespace ESGIForm.Controllers
                 form.ListQuestion = questions;
             }
 
-            JObject json = new JObject();
+            var json = new JObject();
             foreach (Question item in questions)
             {
                 int oui = answer.Where(a => a.QuestionId == item.QuestionId && a.Content == "oui").Count();
@@ -53,15 +53,32 @@ namespace ESGIForm.Controllers
                 JArray array = new JArray();
                 array.Add(oui);
                 array.Add(non);
-                json[item.Title] = array;
+                json[item.Title.ToString()] = array;
             }
 
-
-            return Json(json, JsonRequestBehavior.AllowGet);
+            var foo = json.ToString();
+            return Json(foo, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult debug()
+        public ActionResult Show(Guid guid)
         {
+            // security
+            if (Session["UserID"] != null)
+            {
+                Form form;
+                using (Models.FormContext ctx = new Models.FormContext())
+                {
+                    form = ctx.Forms.Where(f => f.FormId == guid).FirstOrDefault();
+                    if (form.User.UserId != guid) {
+                        return RedirectToAction("Summary", "Home");
+                    }
+                }
+            }
+            else
+            {
+                return RedirectToAction("Summary", "Home");
+            }
+            ViewData["guid"] = guid.ToString();
             return View();
         }
     }

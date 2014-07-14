@@ -130,7 +130,7 @@ namespace ESGIForm.Controllers
             using (var ctx = new Models.FormContext())
             {
                 form = ctx.Forms.Where(f => f.Hash == hash).FirstOrDefault();
-                if (form.CloseDate < DateTime.Now)
+                if (form.CloseDate > DateTime.Now)
                     return RedirectToAction("Summary", form);
                 if (form != null)
                 {

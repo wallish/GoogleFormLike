@@ -5,7 +5,7 @@
 
 }
 <div class="container">
-    @if (Model.CloseDate < DateTime.Now)
+    @if (Model.CloseDate > DateTime.Now)
     {
         <h2>Le formulaire est expiré</h2>
     }else if(@Model.Status != "1"){
