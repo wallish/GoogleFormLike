@@ -499,6 +499,8 @@
     <Content Include="Views\Stat\debug.cshtml" />
     <Content Include="Views\Stat\Show.cshtml" />
     <Content Include="Views\Pdf\Index.cshtml" />
+    <Content Include="Views\Pdf\Open.cshtml" />
+    <Content Include="Views\Pdf\Export.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

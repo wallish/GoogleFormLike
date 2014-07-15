@@ -60,24 +60,24 @@ namespace ESGIForm.Controllers
             return Json(foo, JsonRequestBehavior.AllowGet);
         }
 
+
+
         public ActionResult Show(Guid guid)
         {
             // security
-            if (Session["UserID"] != null)
+            if (Session["UserID"] == null)
             {
-                Form form;
+                return RedirectToAction("Summary", "Home");
+               /* Form form;
                 using (Models.FormContext ctx = new Models.FormContext())
                 {
                     form = ctx.Forms.Where(f => f.FormId == guid).FirstOrDefault();
                     if (form.User.UserId != guid) {
                         return RedirectToAction("Summary", "Home");
                     }
-                }
+                }*/
             }
-            else
-            {
-                return RedirectToAction("Summary", "Home");
-            }
+           
             ViewData["guid"] = guid.ToString();
             return View();
         }

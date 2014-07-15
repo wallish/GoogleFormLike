@@ -81,6 +81,13 @@
     </script>
 </head>
 
+<a href="@Url.Action("Export", "Pdf", new { guid = @ViewData["guid"] })">
+    <button type="button" class="btn btn-primary btn-xs">
+        <span class="glyphicon glyphicon-stats">
+        </span> Exporter
+    </button>
+</a>
+
 <body id="body">
     <!--Div that will hold the pie chart-->
 
