@@ -51,7 +51,7 @@ namespace ESGIForm.Controllers
 
         public ActionResult Edit(Guid guid)
         {
-            //if (Session["UserID"] == null) return RedirectToAction("Login", "Home");
+            if (Session["UserID"] == null) return RedirectToAction("Login", "Home");
             List<Question> lstq = new List<Question>();
             /*string foo = "f5413e73-7c9c-4c82-9790-89d3dca2eba2";
             Guid guid = new Guid(foo);*/
@@ -131,6 +131,8 @@ namespace ESGIForm.Controllers
             {
                 form = ctx.Forms.Where(f => f.Hash == hash).FirstOrDefault();
                 if (form.CloseDate > DateTime.Now)
+                    return RedirectToAction("Summary", form);
+                if (form.Status != "1")
                     return RedirectToAction("Summary", form);
                 if (form != null)
                 {

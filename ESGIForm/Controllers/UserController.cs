@@ -61,5 +61,20 @@ namespace ESGIForm.Controllers
 
             return user;
         }
+
+        /* check user un database */
+
+        public bool CheckUsername(string username)
+        {
+            using (var ctx = new Models.FormContext())
+            {
+
+                User user = ctx.Users.Where(u => u.Username.Equals(username)).FirstOrDefault();
+                if (user != null)
+                    return true;
+                else
+                    return false;
+            }
+        }
     }
 }

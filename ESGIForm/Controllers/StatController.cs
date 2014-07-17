@@ -18,14 +18,12 @@ namespace ESGIForm.Controllers
 
         public ActionResult Index()
         {
-            JArray array = new JArray();
-            array.Add("Manual text");
-            array.Add(new DateTime(2000, 5, 23));
 
-            JObject o = new JObject();
-            o["MyArray"] = array;
             return View();
         }
+
+   
+
 
         public JsonResult Data(Guid guid)
         {

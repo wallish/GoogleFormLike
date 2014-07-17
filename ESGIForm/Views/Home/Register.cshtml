@@ -6,15 +6,18 @@
 }
 
 <div class="container">
+    
     @using (Html.BeginForm("Register", "Home", FormMethod.Post, new { @class = "form-signin" }))
     {
+        <div role="alert" id="msg"></div>
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
         <h2 class="form-signin-heading">Création d'un compte</h2>
         
         @Html.LabelFor(a => a.Username)
-        @Html.TextBoxFor(a => a.Username, new { @class = "form-control" })
+        @Html.TextBoxFor(a => a.Username, new { @class = "form-control", onchange = "checkuser($('#Username').val())", required = "required" })
         @Html.ValidationMessageFor(a => a.Username)
+        <span id="msg"></span><br />
 
         @Html.LabelFor(a => a.Firstname)
         @Html.TextBoxFor(a => a.Firstname, new { @class = "form-control" })
@@ -22,10 +25,33 @@
         @Html.TextBoxFor(a => a.Lastname, new { @class = "form-control" })
 
         @Html.LabelFor(a => a.Password)
-        @Html.PasswordFor(a => a.Password, new { @class = "form-control" })
+        @Html.PasswordFor(a => a.Password, new { @class = "form-control", required = "required" })
         @Html.ValidationMessageFor(a => a.Password)
         
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Créer</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" id="submit">Créer</button>
         
     }
 </div>
+
+<script>
+    function checkuser(username) {
+        console.log(username)
+        $.ajax({
+            url: "/user/CheckUsername",
+            type: "GET",
+            data: "username=" + username,
+            success: function(data) {
+                if (data == "True") {
+                    $('#msg').html('Username non disponible');
+                    $("#submit").attr("disabled", "disabled");
+                    $("#msg").addClass("alert alert-danger");
+                } else {
+                    $('#msg').html('Username disponible');
+                    $("#submit").removeAttr("disabled");
+                    $("#msg").removeClass("alert alert-danger").addClass("alert alert-success");
+
+                }
+            },
+        });
+    }
+</script>

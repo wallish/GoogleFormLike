@@ -90,11 +90,13 @@ namespace ESGIForm.Controllers
 
         public ActionResult Export(Guid guid)
         {
+            if (Session["UserID"] == null) return RedirectToAction("Login", "Home");
             /*var client = new WebClient();
             client.Headers.Add("User-Agent", "Nobody");
             var response = client.DownloadString(new Uri("http://localhost:60164/Stat/Data?guid=54ab59e0-b1e9-474d-9cd8-95427d178646"));
             */
-            String o = this.Data(new Guid("54ab59e0-b1e9-474d-9cd8-95427d178646"));
+            //String o = this.Data(new Guid("54ab59e0-b1e9-474d-9cd8-95427d178646"));
+            String o = this.Data(guid);
             JObject root = JObject.Parse(o);
 
             StringBuilder sb = new StringBuilder();
@@ -125,7 +127,7 @@ namespace ESGIForm.Controllers
                 writer.Close();
                 Response.ContentType = "pdf/application";
                 Response.AddHeader("content-disposition",
-                "attachment;filename=test.pdf");
+                "attachment;filename=export.pdf");
                 Response.OutputStream.Write(ms.GetBuffer(), 0, ms.GetBuffer().Length);
 
             }
